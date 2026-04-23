@@ -1,0 +1,6 @@
+Place your images in this folder:
+- headshot.jpg (your photo for the homepage)
+- resume.pdf or resume.jpg (your resume)
+- portfolio-piece.jpg (image for your portfolio page)
+
+Then update the src paths in the HTML files accordingly.
