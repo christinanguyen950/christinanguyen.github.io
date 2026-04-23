@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Christina Nguyen | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --burgundy:  #6b1a1a;
+      --deep-red:  #8b2020;
+      --blush:     #9e7f74;
+      --black:     #592424;
+      --charcoal:  #2E1A1A;
+      --off-white: #f9f2ee;
+      --cream:     #efe7df;
+      --petal:     #edd5c8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--off-white);
+      color: var(--charcoal);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 90% 10%, rgba(107,26,42,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 5% 90%, rgba(196,105,122,0.07) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background-color: var(--burgundy);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(107,26,42,0.25);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--off-white);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo span { color: var(--petal); }
+
+    nav ul { list-style: none; display: flex; gap: 2.2rem; }
+
+    nav ul li a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--petal);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.2s;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--petal);
+      transition: width 0.25s ease;
+    }
+
+    nav ul li a:hover { color: #fff; }
+    nav ul li a:hover::after { width: 100%; }
+    nav ul li a.active { color: #fff; }
+    nav ul li a.active::after { width: 100%; background: #fff; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, var(--charcoal) 0%, var(--burgundy) 100%);
+      padding: 4rem 2.5rem 3rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '✦';
+      position: absolute;
+      font-size: 14rem;
+      opacity: 0.04;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .page-header .label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blush);
+      margin-bottom: 0.6rem;
+    }
+
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--off-white);
+      font-style: italic;
+    }
+
+    /* ── MAIN ── */
+    main {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      max-width: 960px;
+      margin: 3rem auto;
+      padding: 0 2.5rem;
+      width: 100%;
+    }
+
+    /* ── FEATURED PIECE ── */
+    .featured-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .featured-label::before {
+      content: '';
+      width: 40px;
+      height: 2px;
+      background: var(--blush);
+      display: block;
+    }
+
+    .featured-label span {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blush);
+    }
+
+    .featured-piece {
+      background: var(--cream);
+      border: 1px solid var(--petal);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 6px 32px rgba(107,26,42,0.09);
+      margin-bottom: 3rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .piece-image {
+      width: 100%;
+      height: 380px;
+      background: linear-gradient(145deg, var(--petal) 0%, var(--blush) 40%, var(--burgundy) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .piece-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .piece-image-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      text-align: center;
+    }
+
+    .piece-image-placeholder .big-icon { font-size: 4rem; }
+
+    .piece-image-placeholder p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: rgba(250,243,238,0.85);
+      font-size: 0.9rem;
+    }
+
+    /* Decorative overlay corner accent */
+    .piece-image::after {
+      content: '✦';
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .piece-body {
+      padding: 2.5rem;
+    }
+
+    .piece-meta {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+
+    .tag {
+      background: var(--off-white);
+      border: 1.5px solid var(--petal);
+      border-radius: 50px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.75rem;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: var(--burgundy);
+    }
+
+    .piece-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--black);
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+
+    .piece-body .subtitle {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: var(--blush);
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .piece-body p {
+      font-size: 0.93rem;
+      line-height: 1.85;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+    }
+
+    /* ── PROCESS SECTION ── */
+    .process-section {
+      margin-bottom: 3rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--black);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .section-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--petal), transparent);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .step-card {
+      background: var(--cream);
+      border: 1px solid var(--petal);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(107,26,42,0.1);
+      border-color: var(--blush);
+    }
+
+    .step-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-style: italic;
+      color: var(--blush);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--burgundy);
+      margin-bottom: 0.4rem;
+    }
+
+    .step-card p {
+      font-size: 0.82rem;
+      color: #7a5a5a;
+      line-height: 1.6;
+    }
+
+    /* ── REFLECTION ── */
+    .reflection {
+      background: linear-gradient(135deg, var(--burgundy) 0%, var(--charcoal) 100%);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--off-white);
+      animation: fadeUp 0.6s 0.3s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reflection::before {
+      content: '"';
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: 14rem;
+      color: rgba(255,255,255,0.04);
+      top: -2rem;
+      left: 1rem;
+      line-height: 1;
+    }
+
+    .reflection h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--petal);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .reflection p {
+      font-size: 0.93rem;
+      line-height: 1.85;
+      color: rgba(250,243,238,0.88);
+    }
+
+    /* ── SKILLS GAINED ── */
+    .skills-gained {
+      margin-bottom: 4rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .skills-flex {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .skill-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--cream);
+      border: 1.5px solid var(--petal);
+      border-radius: 50px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--charcoal);
+      transition: all 0.2s;
+    }
+
+    .skill-pill:hover {
+      background: var(--burgundy);
+      color: var(--off-white);
+      border-color: var(--burgundy);
+      transform: translateY(-2px);
+    }
+
+    .skill-pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blush);
+      flex-shrink: 0;
+    }
+
+    .skill-pill:hover .dot { background: var(--petal); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      color: var(--petal);
+      text-align: center;
+      padding: 1.4rem 2rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+    }
+
+    footer a { color: var(--blush); text-decoration: none; }
+    footer a:hover { color: var(--off-white); }
+
+    .footer-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-logo">Christina <span>Nguyen</span></div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="biography.html">Biography</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <p class="label">✦ Creative Work ✦</p>
+    <h1>My Portfolio</h1>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- FEATURED LABEL -->
+    <div class="featured-label">
+      <span>Featured Piece</span>
+    </div>
+
+    <!-- PORTFOLIO PIECE --> 
+<div class="featured-piece">
+  <a href="https://devpost.com/software/project-foxtrot-black-trigger-watchtower-omega" class="piece-image">
+    <img src="../Images/crimsonbrawl.gif" alt="Portfolio Piece">
+  </a>
+  <div class="piece-body">
+    <div class="piece-meta">
+          <span class="tag"> 𐃯 Hackathon Winner</span>
+          <span class="tag">EEG</span>
+          <span class="tag">Game Project</span>
+           <span class="tag">Godot</span>
+    </div>
+    <a href="https://devpost.com/software/project-foxtrot-black-trigger-watchtower-omegat" class="title-link">
+      <h2>Crimson Brawl</h2>
+    </a>
+    <p class="subtitle">Crimson Brawl is a two player EEG-powered game making gaming more immersive, accessible, and interactive.</p>
+    <p>Our two player EEG powered game lets players use their head in order to control in game actions and movements such as jumping, moving left and right, kicking, punching, and dashing. We wanted to explore how EEG technology could make gaming more immersive and accessible for players who have physical disabilities.</p>
+    <p>Successfully created a playable demo where two people can compete against one another regardless of physical disability with character art and animation fully completed within a day.</p>
+  </div>
+</div>
+
+<div class="featured-piece">
+  <a href="https://devpost.com/software/stabilityquest" class="piece-image">
+    <img src="../Images/compoundeffect.jpg" alt="Portfolio Piece">
+  </a>
+  <div class="piece-body">
+    <div class="piece-meta">
+      <span class="tag">Hackathon Project</span>
+      <span class="tag">React</span>
+      <span class="tag">Personal Finance</span>
+      <span class="tag">Gameification</span>
+    </div>
+    <a href="https://devpost.com/software/stabilityquest" class="title-link">
+      <h2>Compound Effect</h2>
+    </a>
+    <p class="subtitle">A game that shows how starting early with investing can turn small choices into massive long-term gains through compounding.</p>
+    <p>We were inspired to help students and newly turned 18 year olds who feel intimidated by investing and managing money showing that index fund investing is simple, low stress, and extremely powerful when started early.</p>
+    <p>Compound Effect is a gamified daily life simulator designed to teach students the long term impact of investing versus only saving money. Players navigate through simulated life events and financial decisions, seeing how consistent investing in index funds can dramatically change their financial future.</p>
+  </div>
+</div>
+
+<div class="featured-piece">
+  <a href="https://devpost.com/software/pengo-tv2f9m" class="piece-image">
+    <img src="../Images/pengo.jpg" alt="Portfolio Piece">
+  </a>
+  <div class="piece-body">
+    <div class="piece-meta">
+          <span class="tag">Accessibility</span>
+          <span class="tag">UX Design</span>
+          <span class="tag">Figma</span>
+          <span class="tag">Mental Health Tech</span>
+    </div>
+    <a href="https://devpost.com/software/pengo-tv2f9m" class="title-link">
+      <h2>Pengo</h2>
+    </a>
+    <p class="subtitle"> An app to help overstimulated kids communicate through visuals.</p>
+    <p>For this year's Figma Build challenge, we decided to take the prompt in a literal direction and address a concern that, currently, has not many existing solutions: sensory overload.
+
+Children, especially those on the autism spectrum or with attention deficit disorders, experience difficulty managing overwhelming sensory environments.</p>
+    <p>Our project focuses on helping children recognize and manage sensory overload by making invisible sensory stress visible and understandable. </p>
+  </div>
+</div>
+
+
+    <!-- PROCESS SECTION -->
+    <div class="process-section">
+      <h2 class="section-heading">My Process</h2>
+      <div class="process-steps">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <h4>Inspiration</h4>
+          <p>When making projects we always try to find a problem that effects people around us that goes unnoticed.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <h4>Creation</h4>
+          <p>We use a multitude of programing languages from HTML to C# in order to develop our projects as well as clear communication among our team.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <h4>Outcome</h4>
+          <p>We create a project that is finalized and something we can be proud of to showcase to others or to ourselves</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- REFLECTION -->
+    <div class="reflection">
+      <h3>✦ Reflection</h3>
+      <p>Throughout these  projects I learned how to communicate across a team while also being able to make something tangable through a short period of time. This has been a valuable learning experience for me and I have learned a lot both in making projects but also time management, communication, and teamwork. These are projects I put my heart and soul into and im more than happy to showcase them in my portfolio!</p>
+    </div>
+
+    <!-- SKILLS GAINED -->
+    <div class="skills-gained">
+      <h2 class="section-heading">Skills Demonstrated</h2>
+      <div class="skills-flex">
+        <div class="skill-pill"><span class="dot"></span> Creative Thinking</div>
+        <div class="skill-pill"><span class="dot"></span> Technical Execution</div>
+        <div class="skill-pill"><span class="dot"></span> Attention to Detail</div>
+        <div class="skill-pill"><span class="dot"></span> Problem Solving</div>
+        <div class="skill-pill"><span class="dot"></span> Communication</div>
+        <!-- Edit or add more skills to match your piece -->
+      </div>
+    </div>
+
+  </main>
+
+ <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span>© 2025 Christina Nguyen. All rights reserved.</span>
+      <span>·</span>
+      <a href="mailto:vis.ualrougedesigns@gmail.com">vis.ualrougedesigns@gmail.com</a>
+      <span>·</span>
+      <a href="https://www.linkedin.com/in/christina-nguyen-53971a326/">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>
